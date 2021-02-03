@@ -4,18 +4,16 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/core/Icon";
+import { Link } from "react-router-dom";
+import Requests from "./Requests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
+
   title: {
-    flexGrow: 1,
+    flexGrow: 5,
   },
 }));
 
@@ -26,18 +24,17 @@ export default function Header() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h6" className={classes.title}>
-            News
+            <Button color="inherit">
+              <Link to={"/Requests"}>Login</Link>
+            </Button>
+            <Button color="inherit">
+              <Link to={"/AdminPage"}>Admin</Link>
+            </Button>
+            <Button color="inherit">
+              <Link to={"/Units"}>Units</Link>
+            </Button>
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </div>
