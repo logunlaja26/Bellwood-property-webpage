@@ -1,20 +1,18 @@
 import React, { Component } from "react";
-import Homepage, { HomePage } from "./HomePage";
-import Adminpage from "./AdminPage";
+import { HomePage } from "./PageStructure/HomePage";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Requests from "./Requests";
-import AdminPage from "./AdminPage";
-import Header from "./Header";
-import Footer from "./Footer";
+import Requests from "./Tenant/Requests";
+import AdminPage from "./Admin/AdminPage";
 
 function MainPage() {
   return (
     <div>
-      <switch>
+      <Switch>
         <Route component={HomePage} exact path="/"></Route>
         <Route component={Requests} path="/requests"></Route>
         <Route component={AdminPage} path="/adminpage"></Route>
-      </switch>
+      </Switch>
     </div>
   );
 }

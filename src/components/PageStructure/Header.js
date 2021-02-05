@@ -5,11 +5,15 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import Requests from "./Requests";
+import Requests from "../Tenant/Requests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+  },
+
+  buttonBackground: {
+    color: "red",
   },
 
   title: {
@@ -25,7 +29,7 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Button color="inherit">
+            <Button className={classes.buttonBackground}>
               <Link to={"/Requests"}>Login</Link>
             </Button>
             <Button color="inherit">

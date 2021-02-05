@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import Requests from "./Requests";
-import AdminPage from "./AdminPage";
+import AdminPage from "../Admin/AdminPage";
 import Header from "./Header";
 import Footer from "./Footer";
 
