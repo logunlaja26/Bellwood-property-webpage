@@ -30,13 +30,19 @@ export default function Header() {
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Button className={classes.buttonBackground}>
-              <Link to={"/Requests"}>Login</Link>
+              <Link style={{ textDecoration: "none" }} to={"/Requests"}>
+                Login
+              </Link>
             </Button>
             <Button color="inherit">
-              <Link to={"/AdminPage"}>Admin</Link>
+              <Link style={{ textDecoration: "none" }} to={"/AdminPage"}>
+                Admin
+              </Link>
             </Button>
             <Button color="inherit">
-              <Link to={"/Units"}>Units</Link>
+              <Link style={{ textDecoration: "none" }} to={"/Units"}>
+                Units
+              </Link>
             </Button>
           </Typography>
         </Toolbar>
