@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../PageStructure/Header";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
+import firebase from "firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,6 +64,7 @@ export default function AddTenantForm() {
           autoComplete="current-password"
           variant="filled"
         />
+        <button type="button">Add</button>
       </div>
     </form>
   );
