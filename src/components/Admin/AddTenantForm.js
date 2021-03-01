@@ -14,27 +14,39 @@ const useStyles = (theme) => ({
 });
 
 export class AddTenantForm extends Component {
-  addNewTenant = () => {
+  constructor() {
+    super();
+    this.state = {
+      firstName: "",
+      lastName: "",
+      tenantId: "",
+      email: "",
+    };
+    this.onChange = this.onChange.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  addNewTenant = (e) => {
+    e.preventDefault();
+    const { tenantId, firstName, lastName, email } = this.state;
     const db = firebase.firestore();
     db.collection("tenants")
       .add({
-        tenantId: "",
-        email: "",
-        adminId: "",
-        role: "tenant",
-        apartments: [
-          {
-            apartmentId: "105",
-            address: "",
-            rentAmount: 100.0,
-            dueDate: "3",
-            lateFees: 100.0,
-            isPaid: true,
-            occupied: true,
-          },
-        ],
+        tenantId,
+        firstName,
+        lastName,
+        email,
       })
       .then((docRef) => {
+        this.setState({
+          tenantId: tenantId,
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+        });
         console.log("Document written with ID: ", docRef.id);
       })
       .catch((error) => {
@@ -47,56 +59,58 @@ export class AddTenantForm extends Component {
     return (
       <div>
         <Header />
-        <form className={classes.root} noValidate autoComplete="off">
+        <form
+          className={classes.root}
+          noValidate
+          autoComplete="off"
+          onSubmit={this.addNewTenant}
+        >
           <div>
             <TextField
               id="filled-password-input"
-              label="Password"
-              type="password"
+              label="Tenant ID"
+              name="tenantId"
+              type="text"
               autoComplete="current-password"
               variant="filled"
+              value={this.state.tenantId}
+              onChange={this.onChange}
+            />
+
+            <TextField
+              id="filled-password-input"
+              label="First Name"
+              name="firstName"
+              type="text"
+              autoComplete="current-password"
+              variant="filled"
+              value={this.state.firstName}
+              onChange={this.onChange}
             />
             <TextField
               id="filled-password-input"
-              label="email"
-              type="password"
+              label="Last Name"
+              name="lastName"
+              type="text"
               autoComplete="current-password"
               variant="filled"
-            />
-            <TextField
-              id="filled-password-input"
-              label="Rent"
-              type="rent"
-              autoComplete="current-password"
-              variant="filled"
+              value={this.state.lastName}
+              onChange={this.onChange}
             />
           </div>
           <div>
             <TextField
               id="filled-password-input"
-              label="Password"
-              type="password"
+              label="Email"
+              name="email"
+              type="text"
               autoComplete="current-password"
               variant="filled"
+              value={this.state.email}
+              onChange={this.onChange}
             />
-            <TextField
-              id="filled-password-input"
-              label="email"
-              type="password"
-              autoComplete="current-password"
-              variant="filled"
-            />
-            <TextField
-              id="filled-password-input"
-              label="Rent"
-              type="rent"
-              autoComplete="current-password"
-              variant="filled"
-            />
-            <button type="submit" onClick={this.addNewTenant}>
-              Add
-            </button>
           </div>
+          <button type="submit">Add</button>
         </form>
       </div>
     );
