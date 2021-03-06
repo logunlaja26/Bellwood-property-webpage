@@ -3,6 +3,7 @@ import Header from "../PageStructure/Header";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import firebase from "firebase";
+//import "./../../App.css";
 
 const useStyles = (theme) => ({
   root: {
@@ -13,7 +14,7 @@ const useStyles = (theme) => ({
   },
 });
 
-export class AddTenantForm extends Component {
+export class Newtenantform extends Component {
   constructor() {
     super();
     this.state = {
@@ -117,4 +118,4 @@ export class AddTenantForm extends Component {
   }
 }
 
-export default withStyles(useStyles)(AddTenantForm);
+export default withStyles(useStyles)(Newtenantform);

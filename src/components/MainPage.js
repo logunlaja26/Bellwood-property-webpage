@@ -4,7 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Units from "./Admin/Units";
 import Requests from "./Tenant/Requests";
 import AdminPage from "./Admin/AdminPage";
-import AddTenantForm from "./Admin/AddTenantForm";
+import Newtenantform from "./Admin/Newtenantform";
+import Displaytenants from "./Admin/Displaytenants";
 
 function MainPage() {
   return (
@@ -14,7 +15,8 @@ function MainPage() {
         <Route component={HomePage} exact path="/"></Route>
         <Route component={Requests} path="/requests"></Route>
         <Route component={AdminPage} path="/adminpage"></Route>
-        <Route component={AddTenantForm} path="/addtenant"></Route>
+        <Route component={Newtenantform} path="/addtenant"></Route>
+        <Route component={Displaytenants} path="/tenants"></Route>
       </Switch>
     </div>
   );

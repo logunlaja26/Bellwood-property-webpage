@@ -14,7 +14,9 @@ export class AdminPage extends Component {
           </Link>
         </Button>
         <Button variant="contained" color="inherit">
-          <Link style={{ textDecoration: "none" }}>Show Tentants</Link>
+          <Link style={{ textDecoration: "none" }} to={"/tenants"}>
+            Show Tentants
+          </Link>
         </Button>
       </div>
     );
