@@ -37,7 +37,6 @@ export class Displaytenants extends Component {
                 <th>FirstName</th>
                 <th>Lastname</th>
                 <th>Email</th>
-                <th>Tenant ID</th>
               </tr>
             </thead>
             <tbody>
@@ -47,7 +46,6 @@ export class Displaytenants extends Component {
                     <td>{tenant.firstName}</td>
                     <td>{tenant.lastName}</td>
                     <td>{tenant.email}</td>
-                    <td>{tenant.tenantId}</td>
                   </tr>
                 );
               })}

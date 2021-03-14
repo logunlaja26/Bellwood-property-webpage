@@ -20,7 +20,6 @@ export class Newtenantform extends Component {
     this.state = {
       firstName: "",
       lastName: "",
-      tenantId: "",
       email: "",
     };
     this.onChange = this.onChange.bind(this);
@@ -36,19 +35,27 @@ export class Newtenantform extends Component {
     const db = firebase.firestore();
     db.collection("tenants")
       .add({
-        tenantId,
         firstName,
         lastName,
         email,
       })
       .then((docRef) => {
+        const tenantDocId = docRef.id;
+        // access admins collection (db.collection)
+        // add tenant Id to the admins tenant list
+        // will be an update
         this.setState({
-          tenantId: tenantId,
           firstName: firstName,
           lastName: lastName,
           email: email,
         });
-        console.log("Document written with ID: ", docRef.id);
+
+        console.log("Document written with ID: ", tenantDocId);
+        db.collection("Admins")
+          .doc("DUkPtHOBinmfefVXeTxd")
+          .update({
+            tentants: firebase.firestore.FieldValue.arrayUnion(tenantDocId),
+          });
       })
       .catch((error) => {
         console.error("Error adding document: ", error);
@@ -67,17 +74,6 @@ export class Newtenantform extends Component {
           onSubmit={this.addNewTenant}
         >
           <div>
-            <TextField
-              id="filled-password-input"
-              label="Tenant ID"
-              name="tenantId"
-              type="text"
-              autoComplete="current-password"
-              variant="filled"
-              value={this.state.tenantId}
-              onChange={this.onChange}
-            />
-
             <TextField
               id="filled-password-input"
               label="First Name"
