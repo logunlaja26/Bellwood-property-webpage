@@ -3,13 +3,14 @@ import Header from "../PageStructure/Header";
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/core/styles";
 import firebase from "firebase";
+import Button from "@material-ui/core/Button";
 //import "./../../App.css";
 
 const useStyles = (theme) => ({
   root: {
     "& .MuiTextField-root": {
-      margin: theme.spacing(1),
-      width: 200,
+      margin: theme.spacing(2),
+      width: 500,
     },
   },
 });
@@ -21,6 +22,8 @@ export class Newtenantform extends Component {
       firstName: "",
       lastName: "",
       email: "",
+      apartment: "",
+      rent: "",
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -31,13 +34,22 @@ export class Newtenantform extends Component {
 
   addNewTenant = (e) => {
     e.preventDefault();
-    const { tenantId, firstName, lastName, email } = this.state;
+    const {
+      tenantId,
+      firstName,
+      lastName,
+      email,
+      apartment,
+      rent,
+    } = this.state;
     const db = firebase.firestore();
     db.collection("tenants")
       .add({
         firstName,
         lastName,
         email,
+        apartment,
+        rent,
       })
       .then((docRef) => {
         const tenantDocId = docRef.id;
@@ -48,6 +60,8 @@ export class Newtenantform extends Component {
           firstName: firstName,
           lastName: lastName,
           email: email,
+          apartment: apartment,
+          rent: rent,
         });
 
         console.log("Document written with ID: ", tenantDocId);
@@ -79,7 +93,6 @@ export class Newtenantform extends Component {
               label="First Name"
               name="firstName"
               type="text"
-              autoComplete="current-password"
               variant="filled"
               value={this.state.firstName}
               onChange={this.onChange}
@@ -89,7 +102,6 @@ export class Newtenantform extends Component {
               label="Last Name"
               name="lastName"
               type="text"
-              autoComplete="current-password"
               variant="filled"
               value={this.state.lastName}
               onChange={this.onChange}
@@ -106,8 +118,28 @@ export class Newtenantform extends Component {
               value={this.state.email}
               onChange={this.onChange}
             />
+            <TextField
+              id="filled-password-input"
+              label="Apartment"
+              name="apartment"
+              type="text"
+              variant="filled"
+              value={this.state.apartment}
+              onChange={this.onChange}
+            />
+            <TextField
+              id="filled-password-input"
+              label="Rent"
+              name="rent"
+              type="text"
+              variant="filled"
+              value={this.state.rent}
+              onChange={this.onChange}
+            />
           </div>
-          <button type="submit">Add</button>
+          <Button type="submit" variant="contained">
+            Submit
+          </Button>
         </form>
       </div>
     );
