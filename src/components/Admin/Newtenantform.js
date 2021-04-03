@@ -34,14 +34,7 @@ export class Newtenantform extends Component {
 
   addNewTenant = (e) => {
     e.preventDefault();
-    const {
-      tenantId,
-      firstName,
-      lastName,
-      email,
-      apartment,
-      rent,
-    } = this.state;
+    const { firstName, lastName, email, apartment, rent } = this.state;
     const db = firebase.firestore();
     db.collection("tenants")
       .add({

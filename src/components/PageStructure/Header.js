@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
-import Requests from "../Tenant/Requests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,17 +28,17 @@ export default function Header() {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
-            <Button className={classes.buttonBackground}>
-              <Link style={{ textDecoration: "none" }} to={"/Requests"}>
+            <Button className={classes.buttonBackground} variant="contained">
+              <Link style={{ textDecoration: "none" }} to={"/sign-in"}>
                 Login
               </Link>
             </Button>
-            <Button color="inherit">
+            <Button color="inherit" variant="contained">
               <Link style={{ textDecoration: "none" }} to={"/AdminPage"}>
                 Admin
               </Link>
             </Button>
-            <Button color="inherit">
+            <Button color="inherit" variant="contained">
               <Link style={{ textDecoration: "none" }} to={"/Units"}>
                 Units
               </Link>

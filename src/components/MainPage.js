@@ -6,6 +6,7 @@ import Requests from "./Tenant/Requests";
 import AdminPage from "./Admin/AdminPage";
 import Newtenantform from "./Admin/Newtenantform";
 import Displaytenants from "./Admin/Displaytenants";
+import TenantSignIn from "./Tenant/TenantSignIn";
 
 function MainPage() {
   return (
@@ -17,6 +18,7 @@ function MainPage() {
         <Route component={AdminPage} path="/adminpage"></Route>
         <Route component={Newtenantform} path="/addtenant"></Route>
         <Route component={Displaytenants} path="/tenants"></Route>
+        <Route component={TenantSignIn} path="/sign-in"></Route>
       </Switch>
     </div>
   );
