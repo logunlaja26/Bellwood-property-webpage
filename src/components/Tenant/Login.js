@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,10 +8,15 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+//import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { useAuth } from "../../contexts/AuthContext";
+import { useHistory } from "react-router-dom";
+import Alert from "@material-ui/lab/Alert";
+import AlertTitle from "@material-ui/lab/AlertTitle";
+//import { Form } from "react-bootstrap";
 
 function Copyright() {
   return (
@@ -44,22 +49,62 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  root: {
+    width: "100%",
+    "& > * + *": {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
-export default function TenantSignIn() {
+export default function Login() {
   const classes = useStyles();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const login = useAuth();
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    console.log(
+      "Email:",
+      emailRef.current.value,
+      "Password: ",
+      passwordRef.current.value
+    );
+    //console.log("Submit function working..");
+    try {
+      setError("");
+      setLoading(true);
+      await login(emailRef.current.value, passwordRef.current.value);
+      history.push("/addtenant");
+    } catch {
+      setError("Failed to log in");
+    }
+
+    setLoading(false);
+  }
 
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+        <div className={classes.root}>
+          {error && (
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              <strong>{error}</strong>
+            </Alert>
+          )}
+        </div>
+
+        <Avatar className={classes.avatar}>{/* <LockOutlinedIcon /> */}</Avatar>
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleSubmit} noValidate>
           <TextField
             variant="outlined"
             margin="normal"
@@ -70,7 +115,10 @@ export default function TenantSignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            inputRef={emailRef}
+            type="email"
           />
+
           <TextField
             variant="outlined"
             margin="normal"
@@ -81,6 +129,7 @@ export default function TenantSignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            inputRef={passwordRef}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -92,6 +141,8 @@ export default function TenantSignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={loading}
+            // onClick={() => console.log("testing.....")}
           >
             Sign In
           </Button>
