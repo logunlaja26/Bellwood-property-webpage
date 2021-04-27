@@ -61,3 +61,7 @@ export function AuthProvider({ children }) {
     </AuthContext.Provider>
   );
 }
+
+// destructuing
+// useContext -- Provider
+// you were the swallowing the error and hard coding "failed to log in"

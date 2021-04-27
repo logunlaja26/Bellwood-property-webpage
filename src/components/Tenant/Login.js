@@ -61,7 +61,7 @@ export default function Login() {
   const classes = useStyles();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const login = useAuth();
+  const { login } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -74,14 +74,14 @@ export default function Login() {
       "Password: ",
       passwordRef.current.value
     );
-    //console.log("Submit function working..");
+
     try {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
       history.push("/addtenant");
-    } catch {
-      setError("Failed to log in");
+    } catch (ex) {
+      setError(`Failed to log in ${ex.message}`);
     }
 
     setLoading(false);
@@ -148,12 +148,12 @@ export default function Login() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="/reset-password" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
