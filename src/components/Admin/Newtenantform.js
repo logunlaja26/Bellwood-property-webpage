@@ -24,6 +24,7 @@ export class Newtenantform extends Component {
       email: "",
       apartment: "",
       rent: "",
+      role: "Tenant",
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -34,7 +35,7 @@ export class Newtenantform extends Component {
 
   addNewTenant = (e) => {
     e.preventDefault();
-    const { firstName, lastName, email, apartment, rent } = this.state;
+    const { firstName, lastName, email, apartment, rent, role } = this.state;
     const db = firebase.firestore();
     db.collection("tenants")
       .add({
@@ -43,6 +44,7 @@ export class Newtenantform extends Component {
         email,
         apartment,
         rent,
+        role,
       })
       .then((docRef) => {
         const tenantDocId = docRef.id;

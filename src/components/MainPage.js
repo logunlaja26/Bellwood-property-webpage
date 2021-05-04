@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { HomePage } from "./PageStructure/HomePage";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Units from "./Admin/Units";
@@ -8,6 +8,7 @@ import Newtenantform from "./Admin/Newtenantform";
 import Displaytenants from "./Admin/Displaytenants";
 import Login from "./Tenant/Login";
 import Signup from "./Tenant/Signup";
+import PasswordReset from "./Tenant/PasswordReset";
 import { AuthProvider } from "./../contexts/AuthContext";
 
 function MainPage() {
@@ -23,6 +24,7 @@ function MainPage() {
             <Route component={Newtenantform} path="/addtenant"></Route>
             <Route component={Displaytenants} path="/tenants"></Route>
             <Route component={Login} path="/sign-in"></Route>
+            <Route component={PasswordReset} path="/reset-password"></Route>
             <Route component={Signup} path="/signup"></Route>
           </Switch>
         </Router>
