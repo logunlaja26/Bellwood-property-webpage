@@ -8,15 +8,14 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    auth.signInWithEmailAndPassword(email, password);
   }
 
   function logout() {
@@ -37,8 +36,13 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+      console.log(`on AuthStateChanged - user email - ${JSON.stringify(user.email)}`);
       setCurrentUser(user);
-      setLoading(false);
+      console.log(`current user state set: ${JSON.stringify(user.email)}`);
+      } else {
+        setCurrentUser(null);
+      }
     });
 
     return unsubscribe;
@@ -54,11 +58,7 @@ export function AuthProvider({ children }) {
     updatePassword,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {!loading && children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
 // destructuing

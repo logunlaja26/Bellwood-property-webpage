@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -60,7 +60,7 @@ export default function Login() {
   const classes = useStyles();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { login } = useAuth();
+  const { login, logout } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -78,13 +78,18 @@ export default function Login() {
       setError("");
       setLoading(true);
       await login(emailRef.current.value, passwordRef.current.value);
-      history.push("/");
+      history.push("/redirect");
     } catch (ex) {
       setError(`Failed to log in ${ex.message}`);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
+
+  useEffect(() => {
+    logout();
+
+  }, [])
 
   return (
     <Container component="main" maxWidth="xs">

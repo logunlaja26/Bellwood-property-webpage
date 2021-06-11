@@ -25,6 +25,7 @@ export class Newtenantform extends Component {
       apartment: "",
       rent: "",
       role: "Tenant",
+      isAdmin: false,
     };
     this.onChange = this.onChange.bind(this);
   }
@@ -33,9 +34,21 @@ export class Newtenantform extends Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  onChangeCheckbox = (event) => {
+    this.setState({ [event.target.name]: event.target.checked });
+  };
+
   addNewTenant = (e) => {
     e.preventDefault();
-    const { firstName, lastName, email, apartment, rent, role } = this.state;
+    const {
+      firstName,
+      lastName,
+      email,
+      apartment,
+      rent,
+      role,
+      isAdmin,
+    } = this.state;
     const db = firebase.firestore();
     db.collection("tenants")
       .add({
@@ -45,6 +58,7 @@ export class Newtenantform extends Component {
         apartment,
         rent,
         role,
+        isAdmin,
       })
       .then((docRef) => {
         const tenantDocId = docRef.id;
@@ -57,6 +71,7 @@ export class Newtenantform extends Component {
           email: email,
           apartment: apartment,
           rent: rent,
+          isAdmin: isAdmin,
         });
 
         console.log("Document written with ID: ", tenantDocId);
@@ -130,6 +145,12 @@ export class Newtenantform extends Component {
               variant="filled"
               value={this.state.rent}
               onChange={this.onChange}
+            />
+            <input
+              name="isAdmin"
+              type="checkbox"
+              checked={this.state.isAdmin}
+              onChange={this.onChangeCheckbox}
             />
           </div>
           <Button type="submit" variant="contained">

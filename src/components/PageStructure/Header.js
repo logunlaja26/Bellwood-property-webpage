@@ -33,11 +33,11 @@ export default function Header() {
                 Login
               </Link>
             </Button>
-            <Button color="inherit" variant="contained">
+            {/* <Button color="inherit" variant="contained">
               <Link style={{ textDecoration: "none" }} to={"/AdminPage"}>
                 Admin
               </Link>
-            </Button>
+            </Button> */}
             <Button color="inherit" variant="contained">
               <Link style={{ textDecoration: "none" }} to={"/Units"}>
                 Units

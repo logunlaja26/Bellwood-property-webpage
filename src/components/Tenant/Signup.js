@@ -29,13 +29,18 @@ export default function Signup() {
       passwordRef.current.value
     );
 
-    setMessage("");
-    const user = await signup(
-      emailRef.current.value,
-      passwordRef.current.value
-    );
-    console.log(JSON.stringify(user));
-    setMessage("Successfully signed up");
+    try {
+      setMessage("");
+      const user = await signup(
+        emailRef.current.value,
+        passwordRef.current.value
+      );
+      console.log(JSON.stringify(user));
+      setMessage("Successfully signed up");
+    } catch (error) {
+      console.log(error.message);
+      setMessage(error.message);
+    }
   }
 
   return (
